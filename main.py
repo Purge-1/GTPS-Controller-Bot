@@ -8,8 +8,8 @@ from datetime import datetime #All the imports
 
 client.remove_command('help')
 
-token = ''
-prefix = ''
+token = 'token here'
+prefix = '!'
 
 client = commands.Bot(command_prefix="gt!")
 
@@ -20,6 +20,7 @@ async def on_ready():
     print('logged in as {0.user}'.format(client))
     await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Game(f"Prefix >> [{prefix}]"))
 
+
 @client.command()
 async def status(ctx):
 	for proc in psutil.process_iter():
@@ -29,38 +30,33 @@ async def status(ctx):
 		else:
 			if 'server' not in proc.name():
 				await ctx.send("Server is now down.")
-			    await ctx.message.add_reaction("✅")
+
 
 @client.command()
 async def online(ctx):
 	player = open('online.txt').readlines()
 	await ctx.send(f"{listplayer} Accounts created.")
-    await ctx.message.add_reaction("✅")
 
 @client.command()
 async def player(ctx):
 	listplayer = len(os.listdir('players'))
 	await ctx.send(f"{listplayer} Account created")
-    await ctx.message.add_reaction("✅")
 
 @client.command()
 async def start(ctx):
 	os.system(r'"server.exe')
 	await ctx.send("Your server is up now.")
-    await ctx.message.add_reaction("✅")
 
 @client.command()
 async def stop(ctx): # iFanp's is stop command.
     gabut = os.system("taskkill /f /im Your enet server.exe")
     if gabut == True:
         await ctx.send("Your server is Down")
-        await ctx.message.add_reaction("✅")
 
 @client.command()
 async def world(ctx):
 	listworld = len(os.listdir('worlds'))
 	await ctx.send(f"{listworld} Created for now on.")
-    await ctx.message.add_reaction("✅")
 
 @client.command()
 async def givegem(ctx, args1, args2):
@@ -73,7 +69,6 @@ async def givegem(ctx, args1, args2):
 	task2.write(givegems)
 	task2.close()
 	await ctx.send(f"Gems are added to \nPlayer: {args1}\nAmount: {args2}")
-    await ctx.message.add_reaction("✅")
 
 @client.command()
 async def creator(ctx):
