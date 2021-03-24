@@ -6,12 +6,13 @@ from discord import Client
 import os, psutil
 from datetime import datetime #All the imports
 
-client.remove_command('help')
 
-token = 'token here'
+token = ''
 prefix = '!'
 
-client = commands.Bot(command_prefix="gt!")
+client = commands.Bot(command_prefix=prefix)
+
+client.remove_command('help')
 
 Client = discord.Client()
 
@@ -78,8 +79,8 @@ async def creator(ctx):
 @client.command()
 async def help(ctx):
     embed = discord.Embed(colour = discord.Colour.blurple())
-    embed.add_field(name="🚧 - :", value="```!status\n!givegem\n!stop\n!start```", inline=False)
-    embed.add_field(name="🚧 - :", value="```!online\n!creator\n!status```", inline=False)
+    embed.add_field(name="🚧 - : Commands", value="```!status\n!givegem\n!stop\n!start```", inline=False)
+    embed.add_field(name="🚧 - : More Commands", value="```!online\n!creator\n!status```", inline=False)
     await ctx.send(embed=embed)
     await ctx.message.add_reaction("✅")
 
