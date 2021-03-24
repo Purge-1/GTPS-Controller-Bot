@@ -5,12 +5,13 @@ from discord.ext import commands
 from discord import Client
 import os, psutil
 from datetime import datetime #All the imports
+import random
 
-
-token = ''
+token = 'token here'
 prefix = '!'
 
 client = commands.Bot(command_prefix=prefix)
+
 
 client.remove_command('help')
 
@@ -83,5 +84,44 @@ async def help(ctx):
     embed.add_field(name="🚧 - : More Commands", value="```!online\n!creator\n!status```", inline=False)
     await ctx.send(embed=embed)
     await ctx.message.add_reaction("✅")
+
+@client.command(alaises=['Cry','Cri','Sad'])
+async def cry(ctx):
+      embed= discord.Embed(title=f'{ctx.author.name} is crying :sob: , My heart is gonna break!! :broken_heart:  ',
+      color=0xdb7bff)
+      gifs=['https://media1.tenor.com/images/8f6da405119d24f7f86ff036d02c2fd4/tenor.gif?itemid=5378935',
+      'https://media1.tenor.com/images/3b1a145fc182fd2b0cbb29d32e37f43b/tenor.gif?itemid=8572836',
+      'https://media1.tenor.com/images/e07ff7159c902150890d84329d253931/tenor.gif?itemid=15021750',
+      'https://media1.tenor.com/images/67df1dca3260e0032f40048759a967a5/tenor.gif?itemid=5415917',
+      'https://media1.tenor.com/images/213ec50caaf02d27d358363016204d1d/tenor.gif?itemid=4553386',
+      'https://media1.tenor.com/images/bdd8e3865332d5ccf2edddd1460e0792/tenor.gif?itemid=16786822',
+      'https://media1.tenor.com/images/bc6517ddc10fc60c4dc73c9e3a00eafa/tenor.gif?itemid=13995463]',
+      'https://tenor.com/view/oh-no-sad-cry-crying-yui-hirasawa-gif-5415917',
+      'https://media.tenor.com/images/224221bb396c782daa0333a23a1c4d51/tenor.gif']
+      link= random.choice(gifs)
+      embed.set_image(url=f'{link}')
+      await ctx.send(embed=embed)
+
+@client.command(alaises=['Smile','Happy','Grin'])
+async def smile(ctx):
+      embed= discord.Embed(title=f'{ctx.author.name} smiles! :grin:  ',
+      color=0xdb7bff)
+      gifs=['https://cdn.discordapp.com/attachments/697029214289002539/720796063950176286/image0.gif',
+      'https://cdn.discordapp.com/attachments/697029214289002539/720796063950176286/image0.gif',
+      'https://images-ext-1.discordapp.net/external/Qj9mj2E1YDcVTespi0Vfig-RiaAc7N0uy88Q0IahBng/https://cdn.weeb.sh/images/rkH84ytPZ.gif?width=400&height=225',
+      'https://media.discordapp.net/attachments/697029214289002539/721016708776722574/image0.gif',
+      'https://cdn.discordapp.com/attachments/719560200897691728/721351702808363008/image0.gif',
+      'http://pa1.narvii.com/6339/ad70e90381a8a5bf9b59657feb86e0bc34108b59_hq.gif?size=450x320']
+      link= random.choice(gifs)
+      embed.set_image(url=f'{link}')
+      await ctx.send(embed=embed)
+
+@client.command(name='logout', aliases=['shutdown'])
+@commands.is_owner()
+async def botstop(ctx):
+    """Turn your bot off"""
+    await ctx.send('Goodbye')
+    await client.logout()
+
 
 client.run(token)
