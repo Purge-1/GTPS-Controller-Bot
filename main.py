@@ -25,7 +25,6 @@ async def status(ctx):
 	for proc in psutil.process_iter():
 		if 'server' in proc.name():
 			await ctx.send("Server is now up!")
-		    await ctx.message.add_reaction("✅")
 			break;
 		else:
 			if 'server' not in proc.name():
