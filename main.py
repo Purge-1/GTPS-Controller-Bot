@@ -9,6 +9,7 @@ from datetime import datetime #All the imports
 client.remove_command('help')
 
 token = ''
+prefix = ''
 
 client = commands.Bot(command_prefix="gt!")
 
@@ -16,7 +17,8 @@ Client = discord.Client()
 
 @client.event
 async def on_ready():
-	print("GTPS Controller is now online!")
+    print('logged in as {0.user}'.format(client))
+    await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Game(f"Prefix >> [{prefix}]"))
 
 @client.command()
 async def status(ctx):
