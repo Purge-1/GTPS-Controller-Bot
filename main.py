@@ -124,4 +124,13 @@ async def botstop(ctx):
     await client.logout()
 
 
+@client.command()
+async def howgay(ctx, member: discord.Member = None):
+        member = member or ctx.author
+        response=[random.randint(0,100)]
+        embed=discord.Embed(title='Gay Rating Device!',
+        description=f"\n{member.mention} is {random.choice(response)}% gay!!  :rainbow_flag:",color  = 0xdb7bff)
+        await ctx.send(embed=embed)
+
+
 client.run(token)
