@@ -6,6 +6,8 @@ from discord import Client
 import os, psutil
 from datetime import datetime #All the imports
 import random
+from PIL import Image
+from io import BytesIO #pip install pillow
 
 token = 'token here'
 prefix = '!'
@@ -21,7 +23,25 @@ Client = discord.Client()
 async def on_ready():
     print('logged in as {0.user}'.format(client))
     await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Game(f"Prefix >> [{prefix}]"))
+	
+@client.event
+async def on_message(ctx, user: discord.Member = None):
+    if user == None:
+        user = ctx.author
+    boost = Image.open("boost.png")
+    asset = user.avatar_url_as(size = 128)
+    data = BytesIO(await asset.read()) #You need this https://cdn.discordapp.com/attachments/751125832088682518/824380999722729512/boost.png
+    pfp = Image.open(data)
 
+    pfp = pfp.resize((173,159)) #519 x 110
+
+
+    boost.paste(pfp, (605,18))
+
+    boost.save("boostcard.png")
+    boostmessage = discord.MessageType.premium_guild_subscription
+    if boostmessage == True:
+        await ctx.send(file = discord.File("boostcard.png"))	
 
 @client.command()
 async def status(ctx):
