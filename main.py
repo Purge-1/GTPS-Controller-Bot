@@ -1,5 +1,6 @@
 #This is a complete make and duplicate of ifanps is contoller
 # Credit: iFanps
+# This is a Half GTPS Controller and Half GTPS Community Bot.
 import discord
 from discord.ext import commands
 from discord import Client
